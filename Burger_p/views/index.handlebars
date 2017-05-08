@@ -1,0 +1,55 @@
+<img id="burger" src="../assets/img/burger.jpg" alt="Burger">
+
+<h1>Burgers from Bob's Burgers</h1>
+<div id="content">  
+  <div id="plate">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Ruta-Bag-A Burger | Yes I Cayenne Burger | Ruta-Bag-A Burger</h3>
+      </div>
+      <div class="panel-body">
+        {{#each burgers}}
+          {{#unless this.devoured}}
+            <div class="notDevouredGroup">       
+              <div class="notDevoured">
+                  {{this.burger_name}}
+              </div>    
+              <div>
+                <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
+                  <input type="hidden" name="devoured" value="true">
+                  <button type="submit" class="btn btn-danger devourBtn">Time to Eat</button>
+                </form>
+              </div>
+            </div>
+          {{/unless}}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+  <div id="waiter">
+    <h2 class="waiterText">Tell Your Server What You'd like</h2>
+    <form class="create-update-form" action="burgers/create" method="POST">
+
+        <input type="text" id="id" name="burger_name">
+        <br><button type="submit" class="btn btn-primary placeOrder">Place Order</button>
+        <p>Enter a burger you want to eat</p>
+
+    </form>
+  </div>  
+  <div id="stomach">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">What You've eaten so far</h3>
+      </div>
+      <div class="panel-body">
+        {{#each burgers}}
+          {{#if this.devoured}}
+              <div class="devoured">
+                {{this.burger_name}}
+              </div>
+          {{/if}}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>
